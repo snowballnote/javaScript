@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			document.querySelector('#btn').addEventListener('click', () => {
+				console.log('btn click test');
+				// 이름 유효성 검사
+				if(document.querySelector('#name').value.length < 2){
+					alert('이름은 2자이상');
+					return;
+				}
+				
+				// 생년 유효성 검사
+				let today = new Date();
+				let currentYear = today.getFullYear();
+				
+				let birth = document.querySelector('#birth').value;
+				if(isNaN(birth)){
+					alert('생년은 4자리 숫자');
+					return;
+				}else if(Number(birth) < (currentYear-200) || Number(birth) > currentYear){
+					alert(`생년은${currentYear-200}보다는 크고 ${currentYear}보다는 작은 숫자`);
+					return;
+				}
+				
+				// 성별 유효성 검사
+				let checkedGender = document.querySelectorAll('.gender:checked');
+				console.log(checkedGender.length);
+				if(checkedGender.length != 1){
+					alert('성별을 선택하세요');
+					return;
+				}
+				// 관심사 유효성 검사
+				let checkedInterest = document.querySelectorAll('.interest:checked');
+				console.log(checkedInterest.length);
+				if(checkedInterest.length < 2){
+					alert('관심사는 2개이상 선택하세요');
+					return;
+				}
+				document.querySelector('#myForm').submit();
+			});
+		});
+	</script>
+</head>
+<body>
+	<form id="myForm" method="post" action="/js-ex2/ex7Action.jsp">
+		<div>
+			이름(2자이상):
+			<input type="text" name="name" id="name">
+		</div>
+		<div>
+			생년(올해연도보다 작은 4자리 숫자):
+			<input type="text" name="birth" id="birth">
+		</div>
+		<div>
+			성별(필수선택):
+			<input type="radio" name="gender" class="gender" value="f">여
+			<input type="radio" name="gender" class="gender" value="m">남
+		</div>
+		<div>
+			관심사(2개이상 필수선택):
+			<input type="checkbox" name="interest" class="interest" value="p">정치
+			<input type="checkbox" name="interest" class="interest" value="ec">경제
+			<input type="checkbox" name="interest" class="interest" value="c">문화
+			<input type="checkbox" name="interest" class="interest" value="s">스포츠
+			<input type="checkbox" name="interest" class="interest" value="en">엔터
+		</div>
+		<button type="button" id="btn">전송</button>
+	</form>
+</body>
+</html>

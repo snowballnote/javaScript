@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+</body>
+<script>
+	let a = 'true';
+	let b = 'false';
+	
+	console.log(Boolean(a));
+	console.log(Boolean(b)); 
+	
+	console.log(Boolean(0));
+	console.log(Boolean(1));
+	console.log(Boolean(2));
+	
+	console.log(Boolean(Infinity)); // Infinity=> 무한대 // true
+	console.log(Boolean(NaN)); // Not a Number // false
+	
+	console.log(Boolean('test')); // t
+	console.log(Boolean('')); // f
+	console.log(Boolean(' ')); // t
+	
+	console.log(Boolean(undefined));
+	
+	console.log(Boolean({})); // t
+	console.log(Boolean([])); // t
+	console.log(Boolean(null)); // f
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<th>name</th><th>age</th><th>gender</th>
+		</tr>
+		<tbody id="list"></tbody>
+	</table>
+	<script>
+		class Student{
+			constructor(name, age, gender){
+				this.name = name;
+				this.age = age;
+				this.gender = gender;
+			}
+		}
+		
+		let s = new Student('로빈', 30, '여');
+		s.move = function(){
+			alert(this.name+'이 움직인다.');
+		};
+		s.move();
+		
+		//delete s.move;
+		//s.move();
+		
+		let list = [];
+		list.push(new Student('루피', 17, '남'));
+		list.push({'name':'조로', 'age':19, 'gender':'남'});
+		list.push(new Student('상디', 18, '남'));
+		console.log(list);
+		
+		let str = '';
+		list.forEach(function(e){
+			str += '<tr>';
+			str += '<td>' + e.name + '</td>';
+			str += '<td>' + e.age + '</td>';
+			str += '<td>' + e.gender + '</td>';
+			str += '</tr>';
+		});
+		console.log(str);
+		document.getElementById('list').innerHTML = str;
+		
+		let obj = {
+			'name':'나미'
+			, 'age':19
+			, 'gender':'여'
+			, 'move':function(){
+					 alert(this.name + '이 움직인다.');
+				}
+		}
+	</script>
+</body>
+</html>

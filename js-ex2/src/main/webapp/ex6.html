@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<script>
+		document.addEventListener('DOMContentLoaded', function(){
+			document.querySelector('#btn0').addEventListener('click', function(){
+				document.querySelector('#target').textContent = 'HEllO';
+				alert(document.querySelector('#target').textContent);
+				
+				// textContent 속성 vs innerHTML 속성
+				// 'hello' 			<span>test</span>
+				// &nbsp;			&nbsp;
+			});
+			
+			let btn1 = document.querySelector('#btn1');
+			btn1.addEventListener('click', function(){ // btn1을 클릭하면
+				console.log('btn1 click');
+				let a = document.querySelector('#a'); // a를 들고온다 // '[id=a]'
+				console.log(a.value);
+			});
+			
+			let btn2 = document.querySelector('#btn2');
+			btn2.addEventListener('click', function(){ // btn2을 클릭하면
+				let b = document.querySelectorAll('.x'); // '[class=x]' // b는 배열 
+				console.log(b.length);
+				console.log(b[0].value);
+				console.log(b[1].value);
+			});
+			
+			let btn3 = document.querySelector('#btn3');
+			btn3.addEventListener('click', function(){
+				let x = document.querySelector('input');
+				console.log(x.value);
+			}); // x : input 태그 하나지만 
+			
+			let btn4 = document.querySelector('#btn4');
+			btn4.addEventListener('click', function(){
+				let y = document.querySelectorAll('input');
+				console.log(y.length);
+				console.log(y[0].value);
+				console.log(y[1].value);
+				console.log(y[2].value);
+			});
+			
+			let btn5 = document.querySelector('#btn5');
+			btn5.addEventListener('click', function(){
+				let z = document.querySelectorAll('[type=text]');
+				console.log(z.length);
+				console.log(z[0].value);
+				console.log(z[1].value);
+				console.log(z[2].value);
+			});
+		});		
+	</script>
+</head>
+<body>
+	<div id="target">구디아카데미</div>
+	<button type="button" id="btn0">btn0</button><br>
+	
+	<input type="text" id="a"><br>
+	<input type="text" id="b" class="x"><br><!-- class는 그룹명 -->
+	<input type="text" id="c" class="x"><br>
+	
+	<button type="button" id="btn1">btn1</button><br>
+	<button type="button" id="btn2">btn2</button><br>
+	<button type="button" id="btn3">btn3</button><br>
+	<button type="button" id="btn4">btn4</button><br>
+	<button type="button" id="btn5">btn5</button><br>
+</body>
+</html>

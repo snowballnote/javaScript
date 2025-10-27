@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>lotto.html</title>
+</head>
+<body>
+	<!-- 로또번호를 출력하는 엘리먼트(div) -->
+	<div id="one"></div>
+	<div id="two"></div>
+	<div id="three"></div>
+	<div id="four"></div>
+	<div id="five"></div>
+	<div id="six"></div>
+	<button id="btn" type="button">로또번호출력</button>
+	
+	<script>
+		 let lottoCreate = function(){
+			let arr = [];
+			for(let i = 0; i < 45; i++){
+				arr[i] = i+1;
+			}
+			
+			for(let i = 0; i < 1000000; i++){
+				let ran = Math.floor(Math.random() * 45); // 0 ~ 44
+				let temp = arr[0];
+				arr[0] = arr[ran];
+				arr[ran] = temp;	
+			}
+			
+			return arr.slice(0, 6);
+		 }
+		 
+		 document.getElementById('btn').addEventListener('click', function(){
+			let result = lottoCreate();
+			console.log(result);
+			setTimeout(function(){
+				document.getElementById('one').innerHTML = result[0];		
+			}, 1);
+			setTimeout(function(){
+				document.getElementById('two').innerHTML = result[1];		
+			}, 1000);
+			setTimeout(function(){
+				document.getElementById('three').innerHTML = result[2];		
+			}, 2000);
+			setTimeout(function(){
+				document.getElementById('four').innerHTML = result[3];		
+			}, 3000);
+			setTimeout(function(){
+				document.getElementById('five').innerHTML = result[4];		
+			}, 4000);
+			setTimeout(function(){
+				document.getElementById('six').innerHTML = result[5];		
+			}, 5000);
+		 }); // 버튼 누를때마다 새로운 번호 생성
+		 
+		 let result = lottoCreate();
+		 console.log(result); 
+	</script>
+</body>
+</html>

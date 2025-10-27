@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		// 1. forEach : 주어진 숫자 배열의 각요소를 출력하면서, 모든 요소의 합을 구하세요
+		const numbers = [3, 7, 1, 9, 4];
+		let sum = 0;
+		numbers.forEach(function(value){
+			sum += value;
+		});
+		console.log(`총합: ${sum}`);
+		
+		// 2. map() : 문자열 배열이 주어졌을 때, 모든 문자열의 길이를 담은 배열을 반환하세요
+		const words = ["apple", "banana", "kiwi"];
+		const lengths = words.map(function(word){
+			 return word.length;
+		});	
+		console.log(lengths);
+		
+		// 3.  filter() : 숫자 배열에서 짝수만 걸러내세요.
+		const numbers2 = [1, 2, 3, 4, 5, 6];
+		const evenNumbers = numbers2.filter(function(value){
+			return value % 2 === 0;
+		});
+		console.log(evenNumbers);
+		
+		// 4. reduce() : 배열의 모든 숫자를 더한 합계를 구하세요.
+		const arr = [10, 20, 30, 40];
+		const sum2 = arr.reduce(function(total, num) {
+		    return total + num;
+		}, 0);
+		console.log(sum2); // 100
+		
+		// 5. some() : 배열에 10보다 큰 숫자가 하나라도 있는지 확인하세요.
+		const arr2 = [3, 5, 8, 12];
+		const over = arr2.some(function(num){
+			return num > 10;
+		});
+		console.log(over);
+		
+		// 6. every() : 모든 숫자가 양수인지
+		const arr3 = [1, 5, 9, -3];
+		const positive = arr3.every(function(num){
+			return num > 0;
+		});
+		console.log(positive);	
+	</script>
+</body>
+</html>

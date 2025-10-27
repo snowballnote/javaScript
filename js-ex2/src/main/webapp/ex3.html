@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button type="button" id="btn">버튼1</button>
+	
+	<script>
+		// 이벤트 처리에 사용되는 콜백함수
+		let btn = document.getElementById('btn');
+		// 대상.addEventListener(이벤트이름, 콜백함수);
+		btn.addEventListener('click', ()=> {
+			alert('버튼 클릭하셨습니다.');
+		}); // 이때 가장 많이 쓰임
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		let f1 =  function(){
+			console.log('f1');
+		};
+		
+		let result = f1(); // undefined자료형의 undefined값
+		console.log(result);
+		
+		let f2 =  function(){
+			console.log('f1');
+			return true;
+		};
+		
+		let result2 = f1(); //boolean자료형의 true값
+		console.log(result2);
+	</script>
+</body>
+</html>

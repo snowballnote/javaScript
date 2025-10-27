@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		// 이름을 가진 함수
+		function f1(){
+			console.log('f1 호출');
+		}
+		// 이름이 있는 함수를 호출하는 방법
+		f1();
+		
+		// 익명함수 호출 방법 1)
+		(function(){
+			console.log('익명함수 호출');
+		})();
+		
+		// 익명함수 호출 방법 2)
+		let f2 = function(){
+			console.log('익명함수 호출');
+		};
+		f2();
+		
+		console.log(f2); // 코드 그대로 출력됨
+		/*
+			ƒ (){
+				console.log('익명함수 호출');
+			}
+		*/
+		// 이름을 가진 함수(선언적 함수) -> 호이스팅 발생
+		function f1(){
+			console.log('f1 호출');
+		}
+	</script>
+</body>
+</html>

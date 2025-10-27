@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		class Member{
+			// 자바스크립트의 생성자
+			constructor(){
+				this.name = name;
+			}
+			// 자바스크립트의 메서드
+			greet(){
+				console.log(this.name+'님 반갑습니다.');
+				console.log(`${this.name}님 반갑습니다.`);
+			}
+		}
+		
+		let m = new Member('루피');
+		m.greet(); // 객체를 참조하여 호출(this 객체를 사용가능)
+		
+		// 자바스크립트의 함수
+		function play(){
+			console.log('놀다');
+		}
+		play(); // this X
+	</script>
+</body>
+</html>
