@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  /* 🌸 전체 레이아웃 */
+  body {
+    background: linear-gradient(180deg, #fff6fa, #e8f4ff);
+    font-family: "Cafe24 Ssurround", "Noto Sans KR", sans-serif;
+    color: #444;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    color: #ff7cab;
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 5px rgba(255, 140, 180, 0.4);
+  }
+
+  /* 🎀 선택 영역 */
+  div {
+    background: #fff;
+    border: 3px solid #ffd6eb;
+    border-radius: 20px;
+    padding: 20px 30px;
+    box-shadow: 0 6px 12px rgba(255, 160, 190, 0.25);
+    margin-bottom: 20px;
+  }
+
+  input[type="radio"] {
+    accent-color: #ff91b6;
+    transform: scale(1.3);
+    cursor: pointer;
+  }
+
+  .rsp + label {
+    margin-right: 15px;
+    font-size: 18px;
+    color: #ff78a5;
+    cursor: pointer;
+  }
+
+  /* ☁️ 버튼 */
+  #playBtn {
+    background: linear-gradient(180deg, #ffbcd5, #ff94b8);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 10px 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 150, 180, 0.4);
+    transition: all 0.25s ease;
+  }
+
+  #playBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 130, 160, 0.5);
+  }
+
+  #playBtn:active {
+    transform: translateY(0);
+  }
+
+  /* 💌 결과창 */
+  #view {
+    width: 300px;
+    height: 100px;
+    background: #fffafc;
+    border: 2px solid #ffd2e3;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 5px rgba(255, 180, 200, 0.2);
+    color: #ff6fa2;
+    font-size: 15px;
+    padding: 10px;
+    resize: none;
+    outline: none;
+    font-family: "D2Coding", monospace;
+  }
+
+  /* 🧸 계단표 */
+  table {
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 12px rgba(255, 180, 210, 0.4);
+  }
+
+  td {
+    border: 1px solid #ffd6e7;
+    padding: 10px 25px;
+    font-size: 18px;
+    color: #ff80a9;
+    text-align: center;
+    background: linear-gradient(180deg, #fff9fb, #fff1f7);
+  }
+
+  tr:nth-child(odd) td {
+    background: #fff8fa;
+  }
+
+  /* 💖 하트 */
+  span {
+    display: inline-block;
+    min-width: 30px;
+    color: #ff94b8;
+    font-size: 20px;
+  }
+
+  #one {
+    font-size: 22px;
+    color: #ff5b9a;
+  }
+
+  /* 🎈 반응형 */
+  @media (max-width: 500px) {
+    h1 {
+      font-size: 22px;
+    }
+    #view {
+      width: 90%;
+    }
+    div {
+      padding: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+	<h1>가위바위보 계단 오르기 게임</h1>
+	
+	<div>
+		<input type="radio" value="가위" class="rsp" name="rsp">가위
+		<input type="radio" value="바위" class="rsp" name="rsp">바위
+		<input type="radio" value="보" class="rsp" name="rsp">보
+		<button id="playBtn">가위바위보 하기</button>
+	</div>
+	<textarea rows="5" cols="50" id="view"></textarea>
+	
+	<hr>
+	
+	<table border="1">
+		<tr>
+			<td>10:<span id="ten"></span></td>
+		</tr>
+		<tr>
+			<td>09:<span id="nine"></span></td>
+		</tr>
+		<tr>
+			<td>08:<span id="eight"></span></td>
+		</tr>
+		<tr>
+			<td>07:<span id="seven"></span></td>
+		</tr>
+		<tr>
+			<td>06:<span id="six"></span></td>
+		</tr>
+		<tr>
+			<td>05:<span id="five"></span></td>
+		</tr>
+		<tr>
+			<td>04:<span id="four"></span></td>
+		</tr>
+		<tr>
+			<td>03:<span id="three"></span></td>
+		</tr>
+		<tr>
+			<td>02:<span id="two"></span></td>
+		</tr>
+		<tr>
+			<td>01:<span id="one">&#128157;</span></td>
+		</tr>
+	</table>
+	
+	<script>
+		// 게임 횟수
+		let cnt = 0;
+		// 모니터링 출력
+		let viewTxt = '';
+		// 현재 층수 위치
+		let currentStair = 1;
+		let preStair = 1; // 이전 위치를 기억 -> 있어도되고 없어도됨
+		
+		let gamePlay = () => {
+			cnt++;
+			console.log(`click gamePlay(cnt: ${cnt})`);
+			
+			// 시스템 선택
+			let arr = ['가위', '바위', '보'];
+			//const SYS_RSP = '가위'; // 디버깅
+			const SYS_RSP = arr[Math.floor(Math.random() * 3)];
+			
+			// 나의 선택
+			let rsp = document.querySelectorAll('.rsp:checked');
+			if(rsp.length == 0){
+				alert('가위 바위 보를 선택하세요!');
+				return;
+			}
+			console.log(rsp[0].value);
+			const MY_RSP = rsp[0].value;
+			
+			let result = '';
+			if(MY_RSP === SYS_RSP){
+				result = '무';
+			}else if(MY_RSP == '가위' && SYS_RSP =='보' ||
+					MY_RSP == '바위' && SYS_RSP =='가위' ||
+					MY_RSP == '보' && SYS_RSP =='바위'){
+				result ='승';
+				// 현재 위치값이 이전위치변수에 저장 후 현재 위치값을 변경
+				preStair = currentStair;
+				currentStair = currentStair + 2; // 이기면 2칸 전진
+				
+			}else{
+				result = '패';
+				if(currentStair > 1){
+					// 현재 위치값이 이전위치변수에 저장 후 현재 위치값을 변경
+					preStair = currentStair;
+					currentStair--;
+				}
+			}
+			console.log("currentStair: ", currentStair, "preStair: ", preStair);
+			
+			
+			let txt = `${cnt} MY_RSP: ${MY_RSP}, SYS_RSP: ${SYS_RSP} - ${result}\n`;
+			console.log(txt);
+			
+			viewTxt += txt;
+			document.querySelector('#view').textContent = viewTxt;
+			
+			// 게임말 옮기기
+			// 이전 위치의 지우기
+			switch(preStair){
+				case 1: document.querySelector('#one').innerHTML = ''; break;
+				case 2: document.querySelector('#two').innerHTML = ''; break;
+				case 3: document.querySelector('#three').innerHTML = ''; break;
+				case 4: document.querySelector('#four').innerHTML = ''; break;
+				case 5: document.querySelector('#five').innerHTML = ''; break;
+				case 6: document.querySelector('#six').innerHTML = ''; break;
+				case 7: document.querySelector('#seven').innerHTML = ''; break;
+				case 8: document.querySelector('#eight').innerHTML = ''; break;
+				case 9: document.querySelector('#nine').innerHTML = ''; break;			
+			}
+			// 게임말 위치 이동
+			switch(currentStair){
+				case 1: document.querySelector('#one').innerHTML = '&#128157;'; break;
+				case 2: document.querySelector('#two').innerHTML = '&#128157;'; break;
+				case 3: document.querySelector('#three').innerHTML = '&#128157;'; break;
+				case 4: document.querySelector('#four').innerHTML = '&#128157;'; break;
+				case 5: document.querySelector('#five').innerHTML = '&#128157;'; break;
+				case 6: document.querySelector('#six').innerHTML = '&#128157;'; break;
+				case 7: document.querySelector('#seven').innerHTML = '&#128157;'; break;
+				case 8: document.querySelector('#eight').innerHTML = '&#128157;'; break;
+				case 9: document.querySelector('#nine').innerHTML = '&#128157;'; break;	
+				default: document.querySelector('#ten').innerHTML = '&#128157;'; break;	
+			}
+			
+			// 게임 종료
+			if(currentStair >= 10){
+				alert(`게임종료, 도전횟수: ${cnt}`);
+				// 버튼 비활성화
+				document.querySelector('#playBtn').disabled = true;
+				document.querySelector('#playBtn').textContent = '게임종료';
+			}
+		}
+		
+		document.querySelector('#playBtn').addEventListener('click', gamePlay);
+	</script>
+</body>
+</html>

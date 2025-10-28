@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="first">
+		<h1>첫번째</h1>
+	</div>
+	
+	<hr>
+	
+	<div id="second">
+		<h1>두번째</h1>
+	</div>
+	
+	<script>
+		let divA = document.querySelector('#first');
+		let divB = document.querySelector('#second');
+		let h1 = document.createElement('h1');
+		h1.textContent = '이동하는 h1 태그';
+		
+		let toFirst = () => {
+			divA.appendChild(h1);
+			setTimeout(toSecond, 1000); // 1초후에 toSecond호출
+		};
+		
+		let toSecond = () => {
+			divB.appendChild(h1);
+			setTimeout(toFirst, 1000);
+		}
+		
+		toFirst();
+		
+	</script>
+</body>
+</html>

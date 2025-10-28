@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<hr>
+	<h1>제거 대상 문서 객체</h1>
+	<hr>
+	
+	<script>
+		setTimeout(() => {
+			let h1 = document.querySelector('h1');
+			h1.parentNode.removeChild(h1);
+		},3000); // 3초후 사라짐
+	</script>
+</body>
+</html>

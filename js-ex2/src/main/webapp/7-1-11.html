@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1>클릭 횟수: <span id="count">0</span></h1>
+   <hr>
+   <button type="button" id="btn"></button>
+</body>
+
+<script>
+   let counter = 0;
+   let count = document.querySelector('#count');
+   
+   let addHandler = ()=>{ // 이벤트 핸들러 함수
+      counter++;
+      count.textContent = counter;
+   };
+   
+   // // h1 click 이벤트 등록
+   document.querySelector('h1').addEventListener('click', addHandler);
+   
+   let onOff = true;
+   document.querySelector('#btn').textContent = onOff;
+   document.querySelector('#btn').addEventListener('click', ()=>{
+      if(onOff) {
+         document.querySelector('h1').removeEventListener('click', addHandler);
+      } else {
+         document.querySelector('h1').addEventListener('click', addHandler);
+      }
+      onOff = !onOff;
+      document.querySelector('#btn').textContent = onOff;
+   });
+</script>
+
+</html> 
