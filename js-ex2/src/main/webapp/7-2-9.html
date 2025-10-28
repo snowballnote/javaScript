@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="checkbox" id="ck"><span>타이머 활성화</span>
+	<button type="button">초기화</button>
+	<h1></h1>
+</body>
+<script>
+	let [timer, timerId] = [0, 0]; 
+	console.log(timer);
+	console.log(timerId);
+	
+	document.querySelector('#ck').addEventListener('change', () => {
+		if(document.querySelector('#ck').checked){ // 체크 상태로
+			timerId = setInterval(() => {
+				timer++;
+				document.querySelector('h1').textContent = timer;
+			}, 1000); // 1초마다 실행
+		}else{ // 체크해지상태로
+			clearInterval(timerId);
+		}
+	});
+</script>
+</html>

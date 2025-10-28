@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 id="title"></h1>
+	<textarea id="output" rows="5" cols="50"></textarea>
+</body>
+<script>
+	document.querySelector('#output').addEventListener('keyup', () => {
+		let len = document.querySelector('#output').value.length;
+		if(len > 10){
+			alert('10자 까지만 입력가능');
+			len = 10;
+			document.querySelector('#output').value
+			 = document.querySelector('#output').value.substr(0, len);
+		}
+		
+		document.querySelector('#title').textContent = len;
+	});
+</script>
+</html>

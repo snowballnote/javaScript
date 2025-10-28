@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	나라 :
+	<select name="country" id="country">
+		<option value="">:::선택:::</option>
+	</select>
+	도시 : 
+	<select name="city" id="city">
+		<option value="">:::선택:::</option>
+	</select>
+</body>
+<script>
+	let countryList = ['한국', '미국', '일본'];
+	let cityList = [
+		{country:'한국', city:'서울'},
+		{country:'한국', city:'부산'},
+		{country:'한국', city:'인천'},
+		{country:'한국', city:'대구'},
+		{country:'미국', city:'뉴욕'},
+		{country:'미국', city:'시카고'},
+		{country:'미국', city:'LA'},
+		{country:'일본', city:'도쿄'},
+		{country:'일본', city:'오사카'},
+		{country:'일본', city:'교토'},
+	];
+	
+	countryList.forEach((c) => {
+		console.log(c);
+		let op = document.createElement('option');
+		op.value = c;
+		op.text = c;
+		document.querySelector('#country').appendChild(op);
+	});
+	
+	document.querySelector('#country').addEventListener('change', () => {
+		if(document.querySelector('#country').value ==''){
+			alert('나라를 선택하세요');
+			document.querySelector('#city').innerHTML = '';
+			return;
+		}
+		
+		// 나라 항목이 선택되었다면
+		let arr = [];
+		cityList.forEach((c) => {
+			if(c.country == document.querySelector('#country').value){
+				arr.push(c.city);
+			}
+		});
+		
+		// arr->select city의 option 으로
+		document.querySelector('#city').innerHTML = '';
+		arr.forEach((c) => {
+			let op = document.createElement('option');
+			op.value = c;
+			op.text = c;
+			document.querySelector('#city').appendChild(op);
+		});
+	});
+</script>
+</html>

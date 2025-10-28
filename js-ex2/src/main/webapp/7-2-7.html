@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<form method="post" action="./7-2-6-action.jsp">
+		<div>
+			분식:
+			<select>
+				<option>떡볶이</option>
+				<option>순대</option>
+				<option>어묵</option>
+				<option>튀김</option>
+			</select>
+		</div>
+	</form>
+</body>
+<script>
+	document.querySelector('select').addEventListener('change', (e)=>{
+		console.log(e.currentTarget.options.selectedIndex);
+		console.log(e.currentTarget.value);
+	});
+</script>
+</html>

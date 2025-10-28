@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1></h1>
+	<form action="./7-2-1.html">
+	 	<input type="text">
+	 	<button type="submit">로그인</button>
+	</form>
+</body>
+<script>
+	let h1 = document.querySelector('h1');
+	
+	document.addEventListener('keyup', function(e) { // 핸들러 함수의 첫번째 매개값은 이벤트정보
+		console.log(e.key);
+		if(e.key == 'Enter'){
+			document.querySelector('form').submit();
+		}
+	});
+</script>
+</html>
