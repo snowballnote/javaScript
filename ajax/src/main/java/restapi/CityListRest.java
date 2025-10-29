@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 @WebServlet("/restapi/cityList")
 public class CityListRest extends HttpServlet {
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String country = request.getParameter("county");
+      String country = request.getParameter("country");
       
       response.setContentType("application/json");
       PrintWriter out = response.getWriter();

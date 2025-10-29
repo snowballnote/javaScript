@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,8 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.CountryDao;
 
-import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/countryList")
 public class CountryListController extends HttpServlet {
@@ -17,10 +18,12 @@ public class CountryListController extends HttpServlet {
 		CountryDao countryDao = new CountryDao();
 		try {
 			List<String> list = countryDao.selectCountryList();
+			System.out.println(list.size());
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/view/countryList.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 }
