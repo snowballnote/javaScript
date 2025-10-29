@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		.important {
+	  		font-weight: bold;
+	  		font-size: xx-large;
+		}
+		.blue {
+			color: blue;
+		}
+		
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>h1 test</h1>
+	<h2>h2 test</h2>
+	<p>p test</p>
+	<div>div test</div>
+	<button type="button" id="button">클릭</button>
+</body>
+<script>
+	$("button").click(function(){
+		$("h1, h2, p").addClass("blue");
+		$("div").addClass("important");
+	});
+</script>
+</html>

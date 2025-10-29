@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<!-- 
+		load -> 
+	 -->
+	 <script>
+	 	$(document).ready(() => {
+			console.log($('h1').text());
+			console.log($('#x').text());
+			console.log($('.y').text());
+			
+			console.log($('#t1').text());
+			console.log($('#t2').text()); // textContent속성
+			console.log($('#t2').html()); // innerHTML속성
+			console.log($('#t3').val()); // value속성
+	 		
+			$('#btn').click(() => {
+				$('#t1').text('GooDee');
+				$('#t2').html('<span style=color:red;>Academy</span>');
+				$('#t3').val('자바과정');
+				$('#t4').val('textarea test...');
+			});
+	 	});
+	 </script>
+</head>
+<body>
+	<h1>hello</h1>
+	<h2 id="x">good</h2>
+	<h3 class="y">bye</h3>
+	
+	<div id="t1">구디</div>
+	<div id="t2"><span>아카데미</span></div>
+	<input type="text" id="t3" value="GDJ95">
+	
+	<textarea rows="3" cols="50" id="t4"></textarea>
+	<button type="button" id="btn">값수정</button>
+</body>
+</html>

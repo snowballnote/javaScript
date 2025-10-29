@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>로그인</h1>
+	<form>
+		<div>
+			ID: <input type="text" name="id" id="id">
+		</div>
+		<div>
+			PW: <input type="password" name="pw" id="pw">
+		</div>
+		<div>
+			<input type="checkbox" name="saveId" id="saveId" value="">아이디 저장
+		</div>
+		<div>
+			<button type="button" id="btn">로그인</button>
+		</div>
+	</form>
+</body>
+<script>
+	let saveId = localStorage.getItem('saveId')
+	console.log(saveId);
+	if(saveId){ // null이 아니면 true, null이면 false
+		document.querySelector('#id').value = saveId;
+		document.querySelector('#saveId').checked = true;
+	}
+	
+	document.querySelector('#btn').addEventListener('click', () => {
+		if(!(document.querySelector('#id').value == ''
+				|| document.querySelector('#pw').value == '')){
+			if(document.querySelector('#saveId').checked){
+				// console.log('if...');
+				// 체크 되어 있으면 웹브라우저 저장소에 ID를 저장
+				localStorage.setItem('saveId', document.querySelector('#id').value);
+			}else{
+				// locaStorage.clear();
+				localStorage.removeItem('saveId');
+			}	
+			alert('로그인 진행');
+		}else{
+			alert('id & pw를 입력하세요');
+		}
+	});
+</script>
+</html>

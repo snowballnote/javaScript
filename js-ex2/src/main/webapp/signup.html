@@ -175,266 +175,266 @@
 			<button type="reset">초기화</button>
 		</p>
 	</form>
-<script>
-// ---------- select 변경 시 콘솔 출력: 한 번만 등록 ----------
-document.querySelector('#job').addEventListener('change', (e) => {
-  const sel = e.currentTarget;
-  console.log('job selectedIndex =>', sel.selectedIndex);
-  console.log('job value =>', sel.value);
-  console.log('job text  =>', sel.options[sel.selectedIndex].text);
-});
+	<script>
+	// ---------- select 변경 시 콘솔 출력: 한 번만 등록 ----------
+	document.querySelector('#job').addEventListener('change', (e) => {
+	  const sel = e.currentTarget;
+	  console.log('job selectedIndex =>', sel.selectedIndex);
+	  console.log('job value =>', sel.value);
+	  console.log('job text  =>', sel.options[sel.selectedIndex].text);
+	});
+	
+	document.querySelector('#country').addEventListener('change', (e) => {
+	  const sel = e.currentTarget;
+	  console.log('country selectedIndex =>', sel.selectedIndex);
+	  console.log('country value =>', sel.value);
+	  console.log('country text  =>', sel.options[sel.selectedIndex].text);
+	});
+	
+	document.querySelector('#contact').addEventListener('change', (e) => {
+	  const sel = e.currentTarget;
+	  console.log('contact selectedIndex =>', sel.selectedIndex);
+	  console.log('contact value =>', sel.value);
+	  console.log('contact text  =>', sel.options[sel.selectedIndex].text);
+	});
+	
+	document.querySelector('#tz').addEventListener('change', (e) => {
+	  const sel = e.currentTarget;
+	  console.log('tz selectedIndex =>', sel.selectedIndex);
+	  console.log('tz value =>', sel.value);
+	  console.log('tz text  =>', sel.options[sel.selectedIndex].text);
+	});
+	
+	// ---------- 제출 버튼 클릭 시 유효성 검사 ----------
+	document.querySelector('#btn').addEventListener('click', () => {
+	  /*** 계정 정보 ***/
+	  // 이름
+	  const fullName = document.querySelector('#fullName').value.trim();
+	  if (fullName === '') {
+	    alert('이름을 입력하세요.');
+	    document.querySelector('#fullName').focus();
+	    return;
+	  }
+	  if (fullName.length < 2) {
+	    alert('이름을 2자 이상 입력하세요.');
+	    document.querySelector('#fullName').focus();
+	    return;
+	  }
+	
+	  // 아이디: 영문, 2자 이상
+	  const username = document.querySelector('#username').value.trim();
+	  if (username === '') {
+	    alert('아이디를 입력하세요.');
+	    document.querySelector('#username').focus();
+	    return;
+	  }
+	  if (username.length < 2) {
+	    alert('아이디를 2자 이상 입력하세요.');
+	    document.querySelector('#username').focus();
+	    return;
+	  }
+	  for (let i = 0; i < username.length; i++) {
+	    const ch = username[i];
+	    if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))) {
+	      alert('아이디는 영어 알파벳만 입력할 수 있습니다.');
+	      document.querySelector('#username').focus();
+	      return;
+	    }
+	  }
+	
+	  // 이메일
+	  const emailInput = document.querySelector('#email');
+	  const emailValue = emailInput.value.trim();
+	  if (emailValue === '') {
+	    alert('이메일을 입력하세요.');
+	    emailInput.focus();
+	    return;
+	  }
+	  if (!emailInput.checkValidity()) {
+	    alert('올바른 이메일 주소를 입력하세요.');
+	    emailInput.focus();
+	    return;
+	  }
+	
+	  // 비밀번호
+	  const pwInput = document.querySelector('#password');
+	  const pw2Input = document.querySelector('#password2');
+	  const password = pwInput.value.trim();
+	  const password2 = pw2Input.value.trim();
+	  if (password === '') {
+	    alert('비밀번호를 입력하세요.');
+	    pwInput.focus();
+	    return;
+	  }
+	  if (password.length < 8) {
+	    alert('비밀번호는 8자 이상이어야 합니다.');
+	    pwInput.focus();
+	    return;
+	  }
+	  if (password2 === '') {
+	    alert('비밀번호 확인을 입력하세요.');
+	    pw2Input.focus();
+	    return;
+	  }
+	  if (password !== password2) {
+	    alert('비밀번호가 일치하지 않습니다.');
+	    pw2Input.focus();
+	    return;
+	  }
+	
+	  /*** 프로필 ***/
+	  // 휴대전화: 숫자/하이픈만 허용 + 숫자 개수 10~11
+	  const phone = document.querySelector('#phone').value.trim();
+	  if (phone === '') {
+	    alert('휴대전화를 입력하세요.');
+	    document.querySelector('#phone').focus();
+	    return;
+	  }
+	  let digitCount = 0;
+	  for (let i = 0; i < phone.length; i++) {
+	    const ch = phone[i];
+	    if (ch >= '0' && ch <= '9') digitCount++;
+	    else if (ch !== '-') {
+	      alert('휴대전화는 숫자와 하이픈(-)만 입력할 수 있습니다.');
+	      document.querySelector('#phone').focus();
+	      return;
+	    }
+	  }
+	  if (digitCount < 10 || digitCount > 11) {
+	    alert('휴대전화는 10~11자리 숫자여야 합니다.');
+	    document.querySelector('#phone').focus();
+	    return;
+	  }
+	
+	  // 생년월일: type="date" → YYYY-MM-DD에서 연도 추출
+	  const birthVal = document.querySelector('#birth').value.trim();
+	  if (birthVal === '') {
+	    alert('생년월일을 선택하세요.');
+	    document.querySelector('#birth').focus();
+	    return;
+	  }
+	  const birthDate = new Date(birthVal);
+	  if (isNaN(birthDate.getTime())) {
+	    alert('올바른 생년월일을 선택하세요.');
+	    document.querySelector('#birth').focus();
+	    return;
+	  }
+	  const birthYear = birthDate.getFullYear();
+	  const now = new Date();
+	  const currentYear = now.getFullYear();
+	  if (birthYear > currentYear || birthYear < currentYear - 120) {
+	    alert(`생년은 ${currentYear - 120}년부터 ${currentYear}년 사이여야 합니다.`);
+	    document.querySelector('#birth').focus();
+	    return;
+	  }
+	
+	  // 성별
+	  const checkedGender = document.querySelectorAll('input[name="gender"]:checked');
+	  if (checkedGender.length === 0) {
+	    alert('성별을 선택하세요.');
+	    document.querySelector('input[name="gender"]').focus();
+	    return;
+	  }
+	
+	  // 직업
+	  const jobSelect = document.querySelector('#job');
+	  if (jobSelect.value === '') {
+	    alert('직업을 선택하세요.');
+	    jobSelect.focus();
+	    return;
+	  }
+	
+	  /*** 주소 ***/
+	  const countrySelect = document.querySelector('#country');
+	  if (countrySelect.value === '') {
+	    alert('국가를 선택하세요.');
+	    countrySelect.focus();
+	    return;
+	  }
+	  const addr1 = document.querySelector('#addr1').value.trim();
+	  if (addr1 === '') {
+	    alert('주소 1을 입력하세요.');
+	    document.querySelector('#addr1').focus();
+	    return;
+	  }
+	  const addr2 = document.querySelector('#addr2').value.trim();
+	  if (addr2 === '') {
+	    alert('주소 2를 입력하세요.');
+	    document.querySelector('#addr2').focus();
+	    return;
+	  }
+	  const city = document.querySelector('#city').value.trim();
+	  if (city === '') {
+	    alert('도시를 입력하세요.');
+	    document.querySelector('#city').focus();
+	    return;
+	  }
+	  const state = document.querySelector('#state').value.trim();
+	  if (state === '') {
+	    alert('시/도를 입력하세요.');
+	    document.querySelector('#state').focus();
+	    return;
+	  }
+	  const zip = document.querySelector('#zip').value.trim();
+	  if (zip === '') {
+	    alert('우편번호를 입력하세요.');
+	    document.querySelector('#zip').focus();
+	    return;
+	  }
+	  let zipAllDigits = true;
+	  for (let i = 0; i < zip.length; i++) {
+	    const ch = zip[i];
+	    if (!(ch >= '0' && ch <= '9')) { zipAllDigits = false; break; }
+	  }
+	  if (!zipAllDigits || zip.length !== 5) {
+	    alert('우편번호는 숫자 5자리여야 합니다.');
+	    document.querySelector('#zip').focus();
+	    return;
+	  }
+	
+	  /*** 선호 설정 ***/
+	  const skillsChecked = document.querySelectorAll('input[name="skills"]:checked');
+	  if (skillsChecked.length < 2) {
+	    alert('관심 기술 스택은 2개 이상 선택하세요.');
+	    document.querySelector('input[name="skills"]').focus();
+	    return;
+	  }
+	  const contactSelect = document.querySelector('#contact');
+	  if (contactSelect.value === '') {
+	    alert('선호하는 연락 방법을 선택하세요.');
+	    contactSelect.focus();
+	    return;
+	  }
+	  const tzSelect = document.querySelector('#tz');
+	  if (tzSelect.value === '') {
+	    alert('시간대를 선택하세요.');
+	    tzSelect.focus();
+	    return;
+	  }
+	
+	  // 자기소개
+	  const bioVal = document.querySelector('#bio').value.trim();
+	  if (bioVal === '') {
+	    alert('자기소개를 입력하세요.');
+	    document.querySelector('#bio').focus();
+	    return;
+	  }
+	  if (bioVal.length < 10 || bioVal.length > 50) {
+	    alert('자기소개는 10자 이상, 50자 이하로 입력하세요.');
+	    document.querySelector('#bio').focus();
+	    return;
+	  }
+	
+	  /*** 약관 ***/
+	  const agree = document.querySelector('input[name="agreeTerms"]');
+	  if (!agree.checked) {
+	    alert('이용약관 및 개인정보 처리방침에 동의해야 가입할 수 있습니다.');
+	    agree.focus();
+	    return;
+	  }
 
-document.querySelector('#country').addEventListener('change', (e) => {
-  const sel = e.currentTarget;
-  console.log('country selectedIndex =>', sel.selectedIndex);
-  console.log('country value =>', sel.value);
-  console.log('country text  =>', sel.options[sel.selectedIndex].text);
-});
-
-document.querySelector('#contact').addEventListener('change', (e) => {
-  const sel = e.currentTarget;
-  console.log('contact selectedIndex =>', sel.selectedIndex);
-  console.log('contact value =>', sel.value);
-  console.log('contact text  =>', sel.options[sel.selectedIndex].text);
-});
-
-document.querySelector('#tz').addEventListener('change', (e) => {
-  const sel = e.currentTarget;
-  console.log('tz selectedIndex =>', sel.selectedIndex);
-  console.log('tz value =>', sel.value);
-  console.log('tz text  =>', sel.options[sel.selectedIndex].text);
-});
-
-// ---------- 제출 버튼 클릭 시 유효성 검사 ----------
-document.querySelector('#btn').addEventListener('click', () => {
-  /*** 계정 정보 ***/
-  // 이름
-  const fullName = document.querySelector('#fullName').value.trim();
-  if (fullName === '') {
-    alert('이름을 입력하세요.');
-    document.querySelector('#fullName').focus();
-    return;
-  }
-  if (fullName.length < 2) {
-    alert('이름을 2자 이상 입력하세요.');
-    document.querySelector('#fullName').focus();
-    return;
-  }
-
-  // 아이디: 영문, 2자 이상
-  const username = document.querySelector('#username').value.trim();
-  if (username === '') {
-    alert('아이디를 입력하세요.');
-    document.querySelector('#username').focus();
-    return;
-  }
-  if (username.length < 2) {
-    alert('아이디를 2자 이상 입력하세요.');
-    document.querySelector('#username').focus();
-    return;
-  }
-  for (let i = 0; i < username.length; i++) {
-    const ch = username[i];
-    if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))) {
-      alert('아이디는 영어 알파벳만 입력할 수 있습니다.');
-      document.querySelector('#username').focus();
-      return;
-    }
-  }
-
-  // 이메일
-  const emailInput = document.querySelector('#email');
-  const emailValue = emailInput.value.trim();
-  if (emailValue === '') {
-    alert('이메일을 입력하세요.');
-    emailInput.focus();
-    return;
-  }
-  if (!emailInput.checkValidity()) {
-    alert('올바른 이메일 주소를 입력하세요.');
-    emailInput.focus();
-    return;
-  }
-
-  // 비밀번호
-  const pwInput = document.querySelector('#password');
-  const pw2Input = document.querySelector('#password2');
-  const password = pwInput.value.trim();
-  const password2 = pw2Input.value.trim();
-  if (password === '') {
-    alert('비밀번호를 입력하세요.');
-    pwInput.focus();
-    return;
-  }
-  if (password.length < 8) {
-    alert('비밀번호는 8자 이상이어야 합니다.');
-    pwInput.focus();
-    return;
-  }
-  if (password2 === '') {
-    alert('비밀번호 확인을 입력하세요.');
-    pw2Input.focus();
-    return;
-  }
-  if (password !== password2) {
-    alert('비밀번호가 일치하지 않습니다.');
-    pw2Input.focus();
-    return;
-  }
-
-  /*** 프로필 ***/
-  // 휴대전화: 숫자/하이픈만 허용 + 숫자 개수 10~11
-  const phone = document.querySelector('#phone').value.trim();
-  if (phone === '') {
-    alert('휴대전화를 입력하세요.');
-    document.querySelector('#phone').focus();
-    return;
-  }
-  let digitCount = 0;
-  for (let i = 0; i < phone.length; i++) {
-    const ch = phone[i];
-    if (ch >= '0' && ch <= '9') digitCount++;
-    else if (ch !== '-') {
-      alert('휴대전화는 숫자와 하이픈(-)만 입력할 수 있습니다.');
-      document.querySelector('#phone').focus();
-      return;
-    }
-  }
-  if (digitCount < 10 || digitCount > 11) {
-    alert('휴대전화는 10~11자리 숫자여야 합니다.');
-    document.querySelector('#phone').focus();
-    return;
-  }
-
-  // 생년월일: type="date" → YYYY-MM-DD에서 연도 추출
-  const birthVal = document.querySelector('#birth').value.trim();
-  if (birthVal === '') {
-    alert('생년월일을 선택하세요.');
-    document.querySelector('#birth').focus();
-    return;
-  }
-  const birthDate = new Date(birthVal);
-  if (isNaN(birthDate.getTime())) {
-    alert('올바른 생년월일을 선택하세요.');
-    document.querySelector('#birth').focus();
-    return;
-  }
-  const birthYear = birthDate.getFullYear();
-  const now = new Date();
-  const currentYear = now.getFullYear();
-  if (birthYear > currentYear || birthYear < currentYear - 120) {
-    alert(`생년은 ${currentYear - 120}년부터 ${currentYear}년 사이여야 합니다.`);
-    document.querySelector('#birth').focus();
-    return;
-  }
-
-  // 성별
-  const checkedGender = document.querySelectorAll('input[name="gender"]:checked');
-  if (checkedGender.length === 0) {
-    alert('성별을 선택하세요.');
-    document.querySelector('input[name="gender"]').focus();
-    return;
-  }
-
-  // 직업
-  const jobSelect = document.querySelector('#job');
-  if (jobSelect.value === '') {
-    alert('직업을 선택하세요.');
-    jobSelect.focus();
-    return;
-  }
-
-  /*** 주소 ***/
-  const countrySelect = document.querySelector('#country');
-  if (countrySelect.value === '') {
-    alert('국가를 선택하세요.');
-    countrySelect.focus();
-    return;
-  }
-  const addr1 = document.querySelector('#addr1').value.trim();
-  if (addr1 === '') {
-    alert('주소 1을 입력하세요.');
-    document.querySelector('#addr1').focus();
-    return;
-  }
-  const addr2 = document.querySelector('#addr2').value.trim();
-  if (addr2 === '') {
-    alert('주소 2를 입력하세요.');
-    document.querySelector('#addr2').focus();
-    return;
-  }
-  const city = document.querySelector('#city').value.trim();
-  if (city === '') {
-    alert('도시를 입력하세요.');
-    document.querySelector('#city').focus();
-    return;
-  }
-  const state = document.querySelector('#state').value.trim();
-  if (state === '') {
-    alert('시/도를 입력하세요.');
-    document.querySelector('#state').focus();
-    return;
-  }
-  const zip = document.querySelector('#zip').value.trim();
-  if (zip === '') {
-    alert('우편번호를 입력하세요.');
-    document.querySelector('#zip').focus();
-    return;
-  }
-  let zipAllDigits = true;
-  for (let i = 0; i < zip.length; i++) {
-    const ch = zip[i];
-    if (!(ch >= '0' && ch <= '9')) { zipAllDigits = false; break; }
-  }
-  if (!zipAllDigits || zip.length !== 5) {
-    alert('우편번호는 숫자 5자리여야 합니다.');
-    document.querySelector('#zip').focus();
-    return;
-  }
-
-  /*** 선호 설정 ***/
-  const skillsChecked = document.querySelectorAll('input[name="skills"]:checked');
-  if (skillsChecked.length < 2) {
-    alert('관심 기술 스택은 2개 이상 선택하세요.');
-    document.querySelector('input[name="skills"]').focus();
-    return;
-  }
-  const contactSelect = document.querySelector('#contact');
-  if (contactSelect.value === '') {
-    alert('선호하는 연락 방법을 선택하세요.');
-    contactSelect.focus();
-    return;
-  }
-  const tzSelect = document.querySelector('#tz');
-  if (tzSelect.value === '') {
-    alert('시간대를 선택하세요.');
-    tzSelect.focus();
-    return;
-  }
-
-  // 자기소개
-  const bioVal = document.querySelector('#bio').value.trim();
-  if (bioVal === '') {
-    alert('자기소개를 입력하세요.');
-    document.querySelector('#bio').focus();
-    return;
-  }
-  if (bioVal.length < 10 || bioVal.length > 50) {
-    alert('자기소개는 10자 이상, 50자 이하로 입력하세요.');
-    document.querySelector('#bio').focus();
-    return;
-  }
-
-  /*** 약관 ***/
-  const agree = document.querySelector('input[name="agreeTerms"]');
-  if (!agree.checked) {
-    alert('이용약관 및 개인정보 처리방침에 동의해야 가입할 수 있습니다.');
-    agree.focus();
-    return;
-  }
-
-  // 모든 검증 통과 → 제출
-  document.querySelector('#myForm').submit();
+	// 모든 검증 통과 → 제출
+	document.querySelector('#myForm').submit();
 });
 </script>
 
